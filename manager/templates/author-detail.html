@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookHive - Author detail</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+         <a href="{% url 'create_author' %}">Add Author</a>
+        <a href="{% url 'list_authors' %}">All Authors</a>
+    </nav>
+    <div>
+        <div>
+            <img src="{{author.image.url}}" style="width: 200px;height: 250px;" alt="author image">
+        </div>
+        <div>
+            <h2>{{author.name}}</h2>
+            <p>{{author.place}}</p>
+            <p>{{author.dob}}</p>
+            <p>{{author.about}}</p>
+        </div>
+    </div>
+</body>
+</html>
