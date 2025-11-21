@@ -20,6 +20,7 @@
             <p>{{author.place}}</p>
             <p>{{author.dob}}</p>
             <p>{{author.about}}</p>
+            <a href="{% url 'edit_author' author.id %}">Edit Author</a>
         </div>
     </div>
 </body>

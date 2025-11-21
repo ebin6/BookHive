@@ -31,4 +31,24 @@ def authorDetail(request,author_id):
 
 def editAuthor(request,writer_id):
     author=Author.objects.get(id=writer_id)
+    if request.method=="POST":
+        name=request.POST['author_name']
+        dob=request.POST['dob']
+        profile=request.POST['about']
+        place=request.POST['place']
+        """
+        get method prevents from raising MultiValuDictKey Error 
+        So even if no value has been given in input field it dose not raise error
+        """
+        profile_pic=request.FILES.get('picture') 
+        author.name=name
+        author.dob=dob
+        author.place=place
+        author.about=profile
+        # Check if profile pic value is None 
+        # if profile_pic is None it means user has not uploaded new image
+        if profile_pic:
+            author.image=profile_pic
+        author.save()
+        return redirect("author_detail",writer_id)
     return render(request,"edit-author.html",{"writer":author})
