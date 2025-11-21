@@ -15,11 +15,12 @@
 
     <div style="display: flex;gap: 50px;">
         <!-- image , name , place are fields or atrributes mentioned in Author class (model) -->
-        {% for writter in authors %}
+        {% for writer in authors %}
             <div>
-                <img src="{{writter.image.url}}" style="width: 100px;height: 100px;">
-                <h4>{{writter.name}}</h4>
-                <p>{{writter.place}}</p>
+                <img src="{{writer.image.url}}" style="width: 100px;height: 100px;">
+                <h4>{{writer.name}}</h4>
+                <p>{{writer.place}}</p>
+                <a href="{% url 'author_detail' writer.id %}">View Detail</a>
             </div>
         {% endfor %}
     </div>
