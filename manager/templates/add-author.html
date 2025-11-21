@@ -17,19 +17,19 @@
             {% csrf_token %}
             <div>
                 <label>Author name</label>
-                <input type="text" name="author_name">
+                <input type="text" name="author_name" required>
             </div>
             <div>
                 <label>Place</label>
-                <input type="text" name="place">
+                <input type="text" name="place" required>
             </div>
             <div>
                 <label>Date of birth</label>
-                <input type="date" name="dob">
+                <input type="date" name="dob" required>
             </div>
             <div>
                 <label>Author Image</label>
-                <input type="file" name="picture">
+                <input type="file" name="picture" required>
             </div>
             <div>
                 <label>About</label><br>

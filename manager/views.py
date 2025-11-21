@@ -52,3 +52,8 @@ def editAuthor(request,writer_id):
         author.save()
         return redirect("author_detail",writer_id)
     return render(request,"edit-author.html",{"writer":author})
+
+def deleteAuthor(request,author_id):
+    writer=Author.objects.get(id=author_id)
+    writer.delete()
+    return redirect("list_authors")

@@ -21,7 +21,15 @@
             <p>{{author.dob}}</p>
             <p>{{author.about}}</p>
             <a href="{% url 'edit_author' author.id %}">Edit Author</a>
+            <a href="{% url 'delete_author' author.id %}" onclick="return confirmDelete()">Delete Author</a>
         </div>
     </div>
+
+    <script>
+        function confirmDelete(){
+            let choice=confirm("Do you wish to delete {{author.name}} ?")
+            return choice
+        }
+    </script>
 </body>
 </html>
