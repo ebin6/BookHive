@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookHive - Add Author</title>
-</head>
-<body>
-    <nav>
-        <a href="{% url 'dashboard' %}">Dashboard</a>
-         <a href="{% url 'create_author' %}">Add Author</a>
-        <a href="{% url 'list_authors' %}">All Authors</a>
-    </nav>
+{% extends 'base.html' %}
+
+{% block title %}BookHive - Edit Author{% endblock %}
+    
+{% block content %}
     <h1>Edit Author</h1>
     
     <div style="display: flex;">
@@ -19,7 +11,7 @@
             <img src="{{writer.image.url}}" style="width: 200px;height: 250px;">
         </div>
 
-        <form method="post" action="{% url 'edit_author' writer.id %}" enctype="multipart/form-data">
+        <form method="post" action="{% url 'edit_author' writer.slug %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
                 <label>Author name</label>
@@ -47,5 +39,4 @@
 
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

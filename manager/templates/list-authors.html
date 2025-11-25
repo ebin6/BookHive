@@ -1,28 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookHive - All Authors</title>
-</head>
-<body>
-    <nav>
-        <a href="{% url 'dashboard' %}">Dashboard</a>
-         <a href="{% url 'create_author' %}">Add Author</a>
-        <a href="{% url 'list_authors' %}">All Authors</a>
-    </nav>
-    <h1>All Authors</h1>
+{% extends 'base.html' %}
 
-    <div style="display: flex;gap: 50px;">
-        <!-- image , name , place are fields or atrributes mentioned in Author class (model) -->
-        {% for writer in authors %}
-            <div>
-                <img src="{{writer.image.url}}" style="width: 100px;height: 100px;">
-                <h4>{{writer.name}}</h4>
-                <p>{{writer.place}}</p>
-                <a href="{% url 'author_detail' writer.id %}">View Detail</a>
-            </div>
-        {% endfor %}
-    </div>
-</body>
-</html>
+{% block title %}BookHive - All Authors{% endblock %}
+    
+{% block content %}
+    <h1 class="heading">All Authors</h1>
+    <main id="list-authors">
+        <div class="authors-list">
+            {% for writer in authors %}
+                <div class="card">
+                    <img src="{{writer.image.url}}">
+                    <h4>{{writer.name}}</h4>
+                    <p>{{writer.place}}</p>
+                    <a href="{% url 'author_detail' writer.slug %}">View Detail</a>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}

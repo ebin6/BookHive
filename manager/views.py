@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from manager.models import Author
+from django.utils.text import slugify
 
 # Create your views here.
 def managerDashboard(request):
@@ -13,7 +14,8 @@ def addAuthor(request):
         profile=request.POST['about']
         place=request.POST['place']
         profile_pic=request.FILES['picture']
-        writer=Author(name=name,place=place,about=profile,dob=dob,image=profile_pic)
+        link=slugify(name)
+        writer=Author(name=name,place=place,about=profile,dob=dob,image=profile_pic,slug=link)
         writer.save()
         return redirect("list_authors")
     return render(request,"add-author.html")
@@ -24,13 +26,13 @@ def allAuthors(request):
     context={"authors":malayalam_authors,"user":"Ebin"}
     return render(request,"list-authors.html",context)
 
-def authorDetail(request,author_id):
-    writer=Author.objects.get(id=author_id)
+def authorDetail(request,link):
+    writer=Author.objects.get(slug=link)
     print(writer)
     return render(request,"author-detail.html",{"author":writer})
 
-def editAuthor(request,writer_id):
-    author=Author.objects.get(id=writer_id)
+def editAuthor(request,link):
+    author=Author.objects.get(slug=link)
     if request.method=="POST":
         name=request.POST['author_name']
         dob=request.POST['dob']
@@ -50,10 +52,10 @@ def editAuthor(request,writer_id):
         if profile_pic:
             author.image=profile_pic
         author.save()
-        return redirect("author_detail",writer_id)
+        return redirect("author_detail",author.slug)
     return render(request,"edit-author.html",{"writer":author})
 
-def deleteAuthor(request,author_id):
-    writer=Author.objects.get(id=author_id)
+def deleteAuthor(request,link):
+    writer=Author.objects.get(slug=link)
     writer.delete()
     return redirect("list_authors")
