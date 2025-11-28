@@ -14,7 +14,7 @@ from pathlib import Path
 import pymysql
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+from django.contrib.messages import constants as messages
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -69,7 +69,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'BookHive.wsgi.application'
-
+MESSAGE_TAGS={
+    messages.ERROR:"danger"
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

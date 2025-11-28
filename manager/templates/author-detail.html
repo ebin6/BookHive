@@ -3,6 +3,13 @@
 {% block title %}BookHive - Author Detail{% endblock %}
     
 {% block content %}
+
+    {% for msg in messages %}
+        <div class="alert alert-{{msg.tags}}" role="alert">
+            {{msg}}
+        </div>
+    {% endfor %}
+
     <div>
         <div>
             <img src="{{author.image.url}}" style="width: 200px;height: 250px;" alt="author image">

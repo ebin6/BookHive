@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.http import HttpResponse
-
+from django.contrib import messages
 # Create your views here.
 
 def register(request):
@@ -28,5 +28,10 @@ def login(request):
             auth.login(request,user)
             return redirect("dashboard")
         else:
-            return HttpResponse("Invalid username or password")
+            messages.error(request,"Invalid username or password")
+            return redirect("signin")
     return render(request,"login.html")
+
+def logout(request):
+    auth.logout(request)
+    return redirect("signin")
