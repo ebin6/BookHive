@@ -4,6 +4,12 @@
     
 {% block content %}
 
+{% for msg in messages %}
+    <div class="alert alert-{{msg.tags}}" role="alert">
+        {{msg}}
+    </div>
+{% endfor %}
+
 <h1>Add Book</h1>
 <div>
     <form method="post" action="{% url 'add_book' %}" enctype="multipart/form-data">

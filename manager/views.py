@@ -70,7 +70,14 @@ def deleteAuthor(request,link):
     messages.success(request,"Author deleted ")
     return redirect("list_authors")
 
-@login_required
+@login_required(login_url="signin")
 def addBook(request):
-    my_form=BookForm()
+    if request.method=="POST":
+        my_form=BookForm(request.POST,request.FILES)
+        if my_form.is_valid():
+            my_form.save()
+            messages.success(request,"New Book added")
+            return redirect("add_book")
+    else:
+        my_form=BookForm()
     return render(request,"add-book.html",{"form":my_form})
