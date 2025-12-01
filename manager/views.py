@@ -3,7 +3,7 @@ from manager.models import Author
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+from .forms import BookForm
 # Create your views here.
 
 @login_required(login_url="signin")
@@ -69,3 +69,8 @@ def deleteAuthor(request,link):
     writer.delete()
     messages.success(request,"Author deleted ")
     return redirect("list_authors")
+
+@login_required
+def addBook(request):
+    my_form=BookForm()
+    return render(request,"add-book.html",{"form":my_form})
