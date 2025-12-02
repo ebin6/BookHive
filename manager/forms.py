@@ -6,3 +6,6 @@ class BookForm(forms.ModelForm):
         model=Book
         fields="__all__"
         exclude=["slug",]
+        widgets={
+            "publish_date":forms.DateInput(attrs={"type":"date",})
+        }

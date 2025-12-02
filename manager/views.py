@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
-from manager.models import Author
+from manager.models import Author,Book
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import BookForm
+from django.views.generic import ListView
+
 # Create your views here.
 
 @login_required(login_url="signin")
@@ -78,6 +80,14 @@ def addBook(request):
             my_form.save()
             messages.success(request,"New Book added")
             return redirect("add_book")
+        else:
+            print(my_form.errors)
+            return redirect("add_book")
     else:
         my_form=BookForm()
     return render(request,"add-book.html",{"form":my_form})
+
+class AllBooksView(ListView):
+    template_name="all-books.html"
+    queryset=Book.objects.all()
+    context_object_name="books"

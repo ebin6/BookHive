@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}BookHive - All Book{% endblock %}
+    
+{% block content %}
+
+{% for msg in messages %}
+    <div class="alert alert-{{msg.tags}}" role="alert">
+        {{msg}}
+    </div>
+{% endfor %}
+
+<h1>All Books</h1>
+<main>
+    <div class="list-books">
+    <!-- Books Cards -->
+        {% for b in books %}
+        <div>
+            <div class="card">
+                <img src="{{b.image.url}}">
+                <div>
+                    <h3>{{b.book}}</h3>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    <!-- Books Card End -->
+    </div>
+</main>
+
+{% endblock %}

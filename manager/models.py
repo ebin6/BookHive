@@ -40,7 +40,8 @@ class Book(models.Model):
     date=models.DateField(auto_now_add=True)
     price=models.DecimalField(max_digits=6,decimal_places=2)
     slug=models.SlugField(unique=True)
-    
+    image=models.ImageField(upload_to="books",default="books/default_cover_page.png")
+
     def __str__(self):
         return self.book
     
