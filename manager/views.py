@@ -4,7 +4,8 @@ from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import BookForm
-from django.views.generic import ListView
+from django.views.generic import ListView,UpdateView,DetailView
+from django.contrib.messages.views import SuccessMessageMixin
 
 # Create your views here.
 
@@ -91,3 +92,21 @@ class AllBooksView(ListView):
     template_name="all-books.html"
     queryset=Book.objects.all()
     context_object_name="books"
+
+class BookDetail(DetailView):
+    template_name='book-details.html'
+    model=Book
+    context_object_name="book"
+    slug_field="slug"
+    slug_url_kwarg="book_link"
+
+
+class UpdateBook(SuccessMessageMixin,UpdateView):
+    template_name="update-book.html"
+    form_class=BookForm
+    model=Book
+    slug_field="slug"
+    slug_url_kwarg="book_slug"
+    success_url="/manager/list-books"
+    success_message="Book details updated"
+

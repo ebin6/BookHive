@@ -12,15 +12,16 @@
 
 <h1>All Books</h1>
 <main>
-    <div class="list-books">
+    <div class="row list-books p-5">
     <!-- Books Cards -->
         {% for b in books %}
-        <div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
             <div class="card">
-                <img src="{{b.image.url}}">
+                <img src="{{b.image.url}}" style="height: 300px;">
                 <div>
                     <h3>{{b.book}}</h3>
                 </div>
+                <a href="{% url 'book_detail' b.slug %}">View Details</a>
             </div>
         </div>
         {% endfor %}

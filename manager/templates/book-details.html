@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}BookHive - Book Details{% endblock %}
+    
+{% block content %}
+
+{% for msg in messages %}
+    <div class="alert alert-{{msg.tags}}" role="alert">
+        {{msg}}
+    </div>
+{% endfor %}
+<div class="row p-5">
+    <div class="col-md-4">
+        <img src="{{book.image.url}}" style="width: inherit;">
+    </div>
+    <div class="col-md-8">
+        <h1>{{book.book}}</h1>
+        <ul>
+            <li>Category : {{book.category}}</li>
+            <li>Author : {{book.author}}</li>
+            <li>Publish Date : {{book.publish_date}}</li>
+            <li>Price : {{book.price}} rs</li>
+        </ul>
+        <p>{{book.about}}</p>
+        <a href="{% url 'edit_book' book.slug %}" class="btn btn-success">Update Details</a>
+    </div>
+</div>
+
+{% endblock %}
