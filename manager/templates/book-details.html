@@ -22,7 +22,14 @@
             <li>Price : {{book.price}} rs</li>
         </ul>
         <p>{{book.about}}</p>
-        <a href="{% url 'edit_book' book.slug %}" class="btn btn-success">Update Details</a>
+        <div>
+            <a href="{% url 'edit_book' book.slug %}" class="btn btn-success">Update Details</a>
+            <form method="post" action="{% url 'delete_book' book.slug %}">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Delete Book">
+            </form>
+        </div>
+
     </div>
 </div>
 

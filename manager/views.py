@@ -4,9 +4,9 @@ from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import BookForm
-from django.views.generic import ListView,UpdateView,DetailView
+from django.views.generic import ListView,UpdateView,DetailView,DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-
+from django.urls import reverse_lazy
 # Create your views here.
 
 @login_required(login_url="signin")
@@ -110,3 +110,9 @@ class UpdateBook(SuccessMessageMixin,UpdateView):
     success_url="/manager/list-books"
     success_message="Book details updated"
 
+
+
+class DeleteBook(DeleteView):
+    model=Book
+    slug_field="slug"
+    success_url=reverse_lazy("list_books")
