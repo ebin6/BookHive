@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+
 # Create your models here.
 class Author(models.Model):
     name=models.CharField(max_length=70)
@@ -14,7 +15,15 @@ class Author(models.Model):
     
     def save(self,*args,**kwargs):
         if not self.slug:
-            self.slug=slugify(self.name)
+            count=1
+            slug_url=slugify(self.name)
+            while Author.objects.filter(slug=slug_url).exists():
+                slug_url=slugify(f"{self.name} {count}")
+                count+=1
+                
+            self.slug=slug_url   
+                
+
         return super().save(*args,**kwargs)
     
 

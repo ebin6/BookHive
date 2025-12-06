@@ -22,8 +22,8 @@ def addAuthor(request):
         profile=request.POST['about']
         place=request.POST['place']
         profile_pic=request.FILES['picture']
-        link=slugify(name)
-        writer=Author(name=name,place=place,about=profile,dob=dob,image=profile_pic,slug=link)
+
+        writer=Author(name=name,place=place,about=profile,dob=dob,image=profile_pic)
         writer.save()
         messages.success(request,"New author added ")
         return redirect("list_authors")
