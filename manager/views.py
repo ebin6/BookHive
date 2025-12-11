@@ -21,7 +21,7 @@ def addAuthor(request):
         dob=request.POST['dob']
         profile=request.POST['about']
         place=request.POST['place']
-        profile_pic=request.FILES['picture']
+        profile_pic=request.FILES.get('picture',None)
 
         writer=Author(name=name,place=place,about=profile,dob=dob,image=profile_pic)
         writer.save()
