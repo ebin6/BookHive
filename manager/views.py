@@ -6,7 +6,7 @@ from django.contrib import messages
 from .forms import BookForm
 from django.views.generic import ListView,UpdateView,DetailView,DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 # Create your views here.
 
 @login_required(login_url="signin")
@@ -109,6 +109,9 @@ class UpdateBook(SuccessMessageMixin,UpdateView):
     slug_url_kwarg="book_slug"
     success_url="/manager/list-books"
     success_message="Book details updated"
+
+    def get_success_url(self):
+        return reverse("book_detail",kwargs={"book_link":self.object.slug})
 
 
 

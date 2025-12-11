@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 
 # Create your models here.
 class Author(models.Model):
@@ -12,6 +13,9 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("author_detail",kwargs={"link":self.slug})
     
     def save(self,*args,**kwargs):
         if not self.slug:
@@ -53,6 +57,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.book
+    
+    def get_absolute_url(self):
+        return reverse("book_detail",kwargs={"book_link":self.slug})
     
     def save(self,*args,**kwargs):
         if not self.slug:

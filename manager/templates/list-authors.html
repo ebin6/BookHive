@@ -18,7 +18,7 @@
                     <img src="{{writer.image.url}}">
                     <h4>{{writer.name}}</h4>
                     <p>{{writer.place}}</p>
-                    <a href="{% url 'author_detail' writer.slug %}">View Detail</a>
+                    <a href="{{writer.get_absolute_url}}">View Detail</a>
                 </div>
             {% endfor %}
         </div>
