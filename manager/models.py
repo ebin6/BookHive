@@ -48,7 +48,7 @@ class Book(models.Model):
     book=models.CharField(max_length=60,unique=True)
     about=models.TextField()
     category=models.ForeignKey(Category,on_delete=models.PROTECT)
-    author=models.ForeignKey(Author,on_delete=models.PROTECT)
+    author=models.ForeignKey(Author,on_delete=models.CASCADE)
     publish_date=models.DateField()
     date=models.DateField(auto_now_add=True)
     price=models.DecimalField(max_digits=6,decimal_places=2)
