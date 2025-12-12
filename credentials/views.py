@@ -4,6 +4,7 @@ from django.contrib import auth
 from django.http import HttpResponse
 from django.contrib import messages
 from credentials.models import Profile
+from django.db import transaction
 # Create your views here.
 
 def register(request):
@@ -16,11 +17,15 @@ def register(request):
         if User.objects.filter(username=mail).exists():
             return HttpResponse("User already exists")
         else:
-            user=User.objects.create_user(username=mail,first_name=first_name,last_name=last_name,email=mail,password=password)
-            user.save()
-            Profile.objects.create(user=user,profile_pic=pic)
+            try:
+                with transaction.atomic():
+                    user=User.objects.create_user(username=mail,first_name=first_name,last_name=last_name,email=mail,password=password)
+                    user.save()
+                    Profile.objects.create(user=user,profile_pic=pic)
 
-            return redirect("signin")
+                    return redirect("signin")
+            except Exception as e:
+                messages.error(request,"Can't create new user {}".format(e))
     return render(request,"register.html")
 
 def login(request):
