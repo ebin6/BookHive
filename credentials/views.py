@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.http import HttpResponse
 from django.contrib import messages
+from credentials.models import Profile
 # Create your views here.
 
 def register(request):
@@ -11,11 +12,14 @@ def register(request):
         last_name=request.POST["last_name"]
         mail=request.POST['email']
         password=request.POST['password']
+        pic=request.FILES.get("profile_pic",None)
         if User.objects.filter(username=mail).exists():
             return HttpResponse("User already exists")
         else:
             user=User.objects.create_user(username=mail,first_name=first_name,last_name=last_name,email=mail,password=password)
             user.save()
+            Profile.objects.create(user=user,profile_pic=pic)
+
             return redirect("signin")
     return render(request,"register.html")
 
