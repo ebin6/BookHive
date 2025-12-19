@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Author(models.Model):
     name=models.CharField(max_length=70)
@@ -48,7 +48,7 @@ class Book(models.Model):
     book=models.CharField(max_length=60,unique=True)
     about=models.TextField()
     category=models.ForeignKey(Category,on_delete=models.PROTECT)
-    author=models.ForeignKey(Author,on_delete=models.CASCADE)
+    author=models.ForeignKey(Author,on_delete=models.CASCADE,related_name="books")
     publish_date=models.DateField()
     date=models.DateField(auto_now_add=True)
     price=models.DecimalField(max_digits=6,decimal_places=2)
@@ -61,7 +61,22 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse("book_detail",kwargs={"book_link":self.slug})
     
+    def likes_count(self):
+        return self.likes.count()
+
+    def is_liked_by(self, user):
+        return self.likes.filter(user=user).exists()
+    
+    
     def save(self,*args,**kwargs):
         if not self.slug:
             self.slug=slugify(self.book)
         return super().save(*args,*kwargs)
+    
+class BookLike(models.Model):
+    book = models.ForeignKey(Book,on_delete=models.CASCADE,related_name="likes")
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="book_likes")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("book", "user")  

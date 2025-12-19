@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect
-from manager.models import Author,Book
+from django.shortcuts import render,redirect,get_object_or_404
+from manager.models import Author,Book,BookLike
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -38,8 +38,9 @@ def allAuthors(request):
 
 def authorDetail(request,link):
     writer=Author.objects.get(slug=link)
-    print(writer)
-    return render(request,"author-detail.html",{"author":writer})
+    # books=Book.objects.filter(author=writer)
+    books=writer.books.all()
+    return render(request,"author-detail.html",{"author":writer,"books":books})
 
 @login_required(login_url="signin")
 def editAuthor(request,link):
@@ -119,3 +120,17 @@ class DeleteBook(DeleteView):
     model=Book
     slug_field="slug"
     success_url=reverse_lazy("list_books")
+
+
+
+def bookLike(request, slug):
+    book = get_object_or_404(Book, slug=slug)
+    like, created = BookLike.objects.get_or_create(book=book,user=request.user)
+
+    if not created:
+        like.delete()
+        messages.info(request, "You unliked this book.")
+    else:
+        messages.success(request, "You liked this book.")
+
+    return redirect(book.get_absolute_url())

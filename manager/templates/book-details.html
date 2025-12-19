@@ -22,6 +22,7 @@
             <li>Price : {{book.price}} rs</li>
         </ul>
         <p>{{book.about}}</p>
+        <p>Like : {{book.likes_count}}</p>
         <div>
             <a href="{% url 'edit_book' book.slug %}" class="btn btn-success">Update Details</a>
             <form method="post" action="{% url 'delete_book' book.slug %}">
