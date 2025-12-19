@@ -23,6 +23,7 @@
         </ul>
         <p>{{book.about}}</p>
         <p>Like : {{book.likes_count}}</p>
+        <button>{% if is_liked %}Unlike{% else %}Like{% endif %}</button>
         <div>
             <a href="{% url 'edit_book' book.slug %}" class="btn btn-success">Update Details</a>
             <form method="post" action="{% url 'delete_book' book.slug %}">

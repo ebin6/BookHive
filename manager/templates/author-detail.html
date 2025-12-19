@@ -25,6 +25,7 @@
     </div>
     <section id="author-books">
         <h1>Related Books</h1>
+        {% if books %}
         <div class="row list-books p-5">
             <!-- Books Cards -->
                 {% for b in books %}
@@ -40,6 +41,10 @@
                 {% endfor %}
             <!-- Books Card End -->
             </div>
+
+            {% else %}
+                <p>No related books found</p>
+            {% endif %}
         </section>
 
     <script>

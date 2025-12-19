@@ -101,6 +101,11 @@ class BookDetail(DetailView):
     slug_field="slug"
     slug_url_kwarg="book_link"
 
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context["is_liked"]=self.object.likes.filter(user=self.request.user).exists()
+        return context
+
 
 class UpdateBook(SuccessMessageMixin,UpdateView):
     template_name="update-book.html"
