@@ -17,3 +17,4 @@ urlpatterns=[
     path("delete-book/<slug:slug>",views.DeleteBook.as_view(),name="delete_book"),
     path("books/<slug:slug>/like/",views.bookLike,name="book_like")
 ]
+

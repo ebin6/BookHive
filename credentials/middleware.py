@@ -6,6 +6,7 @@ class LoginRequiredMiddleware:
     
     def __call__(self, request):
         if not request.user.is_authenticated and request.path.startswith("/manager/"):
+            
             return redirect("signin")
 
         response=self.get_response(request)

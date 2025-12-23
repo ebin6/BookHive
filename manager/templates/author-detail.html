@@ -19,8 +19,10 @@
             <p>{{author.place}}</p>
             <p>{{author.dob}}</p>
             <p>{{author.about}}</p>
+            {% if request.user.profile.role == "manager" %}
             <a href="{% url 'edit_author' author.slug %}">Edit Author</a>
             <a href="{% url 'delete_author' author.slug %}" onclick="return confirmDelete()">Delete Author</a>
+            {% endif %}
         </div>
     </div>
     <section id="author-books">
