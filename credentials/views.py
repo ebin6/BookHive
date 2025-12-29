@@ -35,7 +35,10 @@ def login(request):
         user=auth.authenticate(request,username=email,password=passwd)
         if user is not None:
             auth.login(request,user)
-            return redirect("dashboard")
+            if user.profile.role=="manager":
+                return redirect("dashboard")
+            elif user.profile.role=="user":
+                return redirect("list_authors")
         else:
             messages.error(request,"Invalid username or password")
             return redirect("signin")

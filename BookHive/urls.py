@@ -32,6 +32,7 @@ urlpatterns = [
     path("response/",testResponse),
     path("index/",home),
     path("manager/",include("manager.urls")),
+    path("user/",include("user.urls")),
     path("",include("credentials.urls"))
 
 ]
