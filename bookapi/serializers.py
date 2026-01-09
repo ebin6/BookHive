@@ -2,6 +2,7 @@ from rest_framework import serializers
 from manager.models import Author
 
 class AuthorSerializer(serializers.ModelSerializer):
+    slug=serializers.SlugField(read_only=True)
     class Meta:
         model=Author
         fields=["id","name","place","about",
