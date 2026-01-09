@@ -21,6 +21,12 @@ from django.shortcuts import render
 from django.conf.urls.static import static
 from django.conf import settings
 
+from bookapi.views import AuthorAPI
+from rest_framework.routers import DefaultRouter
+
+router=DefaultRouter()
+router.register("author",AuthorAPI)
+
 def testResponse(request):
     return HttpResponse("Welcome to BookHive")
 
@@ -33,6 +39,7 @@ urlpatterns = [
     path("index/",home),
     path("manager/",include("manager.urls")),
     path("user/",include("user.urls")),
+    path("api/",include(router.urls)),
     path("",include("credentials.urls"))
 
 ]

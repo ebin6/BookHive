@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "manager",
     "credentials",
-    "user"
+    "user",
+    "bookapi",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
