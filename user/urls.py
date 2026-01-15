@@ -6,5 +6,7 @@ urlpatterns=[
         path("author-detail/<slug:link>",views.authorDetail,name="author_detail"),
         path("list-books",views.AllBooksView.as_view(),name="list_books"),
         path("book-detail/<slug:book_link>",views.BookDetail.as_view(),name="book_detail"),
-        path("books/<slug:slug>/like/",views.bookLike,name="book_like")
+        path("books/<slug:slug>/like/",views.bookLike,name="book_like"),
+
+        path("books-filter/<slug:category>",views.books_by_category,name="filter_book_category")
 ]

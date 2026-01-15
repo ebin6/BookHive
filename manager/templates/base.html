@@ -26,8 +26,19 @@
             <a href="{% url 'signup' %}">Register</a>
         {% endif %}
 
-
+    <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Categories
+    </button>
+    <ul class="dropdown-menu">
+        {% for cat in book_categories %}
+            <li><a class="dropdown-item" href="{% url 'filter_book_category' cat.slug %}">{{cat.category}}</a></li>
+        {% endfor %}
+    </ul>
+    </div>
     </nav>
+
+    
 
     {% block content %}
 

@@ -7,3 +7,5 @@ class AuthorSerializer(serializers.ModelSerializer):
         model=Author
         fields=["id","name","place","about",
                 "image","dob","slug"]
+        
+        

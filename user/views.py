@@ -46,3 +46,8 @@ def bookLike(request, slug):
         messages.success(request, "You liked this book.")
 
     return redirect(book.get_absolute_url())
+
+
+def books_by_category(request,category):
+    books=Book.objects.filter(category__slug=category)
+    return render(request,"all-books.html",{"books":books})
