@@ -23,9 +23,8 @@ from django.contrib.messages import constants as messages
 SECRET_KEY = 'django-insecure-isx_$2d&0@cx+c97j@tm3=x4#m#o*d*&3rqi(y3lje=-13&4e9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ["localhost",'127.0.0.1']
 
 
 # Application definition
@@ -52,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "credentials.middleware.LoginRequiredMiddleware"
+    "credentials.middleware.LoginRequiredMiddleware",
 ]
 
 ROOT_URLCONF = 'BookHive.urls'

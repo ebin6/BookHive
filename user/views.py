@@ -12,7 +12,7 @@ def allAuthors(request):
     return render(request,"list-authors.html",context)
 
 def authorDetail(request,link):
-    writer=Author.objects.get(slug=link)
+    writer=get_object_or_404(Author,slug=link)
     # books=Book.objects.filter(author=writer)
     books=writer.books.all()
     return render(request,"author-detail.html",{"author":writer,"books":books})
